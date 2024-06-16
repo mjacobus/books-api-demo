@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :publisher do
-    name { "MyString" }
-    user { nil }
+    name { Faker::Book.publisher }
+    user
   end
 end

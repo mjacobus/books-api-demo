@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :book do
-    title { "MyString" }
-    synopsis { "MyText" }
-    author { nil }
-    genre { nil }
-    publisher { nil }
-    user { nil }
+    title {  Faker::Book.title }
+    synopsis { Faker::Lorem.paragraph }
+    author
+    genre
+    publisher
+    user
   end
 end
