@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :genre do
-    name { "MyString" }
-    user { nil }
+    name { Faker::Book.genre }
+    user
   end
 end
