@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_16_224414) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_224822) do
   create_table "authors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -18,6 +18,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_224414) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_authors_on_user_id"
+  end
+
+  create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "synopsis"
+    t.bigint "author_id", null: false
+    t.bigint "genre_id", null: false
+    t.bigint "publisher_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["genre_id"], name: "index_books_on_genre_id"
+    t.index ["publisher_id"], name: "index_books_on_publisher_id"
+    t.index ["title", "author_id"], name: "index_books_on_title_and_author_id", unique: true
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -45,6 +61,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_224414) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "books", "authors"
+  add_foreign_key "books", "genres"
+  add_foreign_key "books", "publishers"
+  add_foreign_key "books", "users"
   add_foreign_key "genres", "users"
   add_foreign_key "publishers", "users"
 end
