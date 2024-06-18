@@ -6,11 +6,6 @@ class UserSeeder
       user.access_token = access_token
     end
     @user.save!
-
-    Book.destroy_all
-    Genre.destroy_all
-    Publisher.destroy_all
-    Author.destroy_all
   end
 
   def seed
@@ -62,6 +57,12 @@ class UserSeeder
     end
   end
 end
+
+Book.destroy_all
+Genre.destroy_all
+Publisher.destroy_all
+Author.destroy_all
+User.destroy_all
 
 seeder = UserSeeder.new(email: 'john@doe.com', access_token: 'token_one')
 seeder.seed
