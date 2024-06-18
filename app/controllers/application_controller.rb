@@ -3,6 +3,10 @@ class ApplicationController < ActionController::API
     argument_error(error)
   end
 
+  rescue_from StandardError do |error|
+    application_error(error)
+  end
+
   private
 
   def current_user
@@ -22,6 +26,10 @@ class ApplicationController < ActionController::API
 
   def argument_error(error)
     render json: { error: 'Invalid request', backtrace: backtrace(error) }.compact, status: :bad_request
+  end
+
+  def application_error(error)
+    render json: { error: 'Applicaiton request', backtrace: backtrace(error) }.compact, status: :application_error
   end
 
   def backtrace(error)
