@@ -9,7 +9,7 @@ module Api
         end
 
         def handle(request)
-          authors = current_user.authors.limit(request.limit)
+          authors = current_user.authors.limit(request.per_page).offset(request.page - 1)
           IndexResponse.new(authors:)
         end
       end
