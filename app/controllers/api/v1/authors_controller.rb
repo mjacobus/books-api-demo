@@ -2,9 +2,11 @@ module Api
   module V1
     class AuthorsController < ApplicationController
       def index
-        render json: {
-          data: current_user.authors
-        }
+        request = V1::Authors::IndexRequest.new(
+          per_page: params[:per_page].presence,
+          page: params[:page].presence
+        )
+        handle_request(request)
       end
     end
   end
